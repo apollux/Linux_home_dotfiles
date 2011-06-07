@@ -13,7 +13,11 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -lFhA'
+alias ll='ls -lFh'
+alias lla='ll -A'
 alias la='ls -A'
 alias l='ls -CF'
 
+# pushd popd aliases
+alias pu='pushd .'
+alias po='popd'
