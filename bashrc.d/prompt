@@ -45,6 +45,8 @@
 # By Andre Kwakernaak
 # added [virtualenv:<name of current active virtualenv> to DYNAMIC SECTION
 # removed day change notice
+# prompt ends with '>'
+# pwd on first line trucated to half screen size
 
 # Configure Colors:
 COLOR_WHITE='\033[1;37m'
@@ -84,7 +86,20 @@ function promptcmd () {
             ;;
     esac
     PS1="${TITLEBAR}"
-  
+
+    # Empty line
+    PS1="${PS1}\n"
+
+    # Working directory
+    if [ -w "${PWD}" ]; then 
+        PS1="${PS1}\[${COLOR_GREEN}\]$(prompt_workingdir)"
+    else                                 
+        PS1="${PS1}\[${COLOR_RED}\]$(prompt_workingdir)"
+    fi
+
+    # New line after pwd
+    PS1="${PS1}\n"
+ 
     # User
     if [ ${UID} -eq 0 ] ; then
         if [ "${USER}" == "${LOGNAME}" ]; then
@@ -104,12 +119,7 @@ function promptcmd () {
         fi
     fi
 
-    # HTTP Proxy var configured or not
-    if [ -n "$http_proxy" ] ; then
-        PS1="${PS1}\[${COLOR_GREEN}\]@"
-    else                               
-        PS1="${PS1}\[${COLOR_LIGHTRED}\]@"
-    fi
+    PS1="${PS1}\[${COLOR_DEFAULT}\]@"
 
     # Host
     if [[ ${SSH_CLIENT} ]] || [[ ${SSH2_CLIENT} ]]; then 
@@ -165,57 +175,12 @@ function promptcmd () {
 	PS1="${PS1}\[${COLOR_YELLOW}\][virtualenv:`basename "$VIRTUAL_ENV"`]"
     fi
 
-    # Bracket {
-    if [ ${UID} -eq 0 ]; then              
-        if [ "${USER}" == "${LOGNAME}" ]; then 
-            if [[ ${SUDO_USER} ]]; then
-                PS1="${PS1}\[${COLOR_RED}\]"
-            else
-                PS1="${PS1}\[${COLOR_LIGHTRED}\]"
-            fi
-        else                               
-            PS1="${PS1}\[${COLOR_YELLOW}\]"
-        fi
-    else                                 
-        if [ "${USER}" == "${LOGNAME}" ]; then 
-            PS1="${PS1}\[${COLOR_GREEN}\]"
-        else                               
-            PS1="${PS1}\[${COLOR_BROWN}\]"
-        fi
-    fi
-    PS1="${PS1}{ "
-
-    # Working directory
-    if [ -w "${PWD}" ]; then 
-        PS1="${PS1}\[${COLOR_GREEN}\]$(prompt_workingdir)"
-    else                                 
-        PS1="${PS1}\[${COLOR_RED}\]$(prompt_workingdir)"
-    fi
-    
-    # Closing bracket } and $\#
-    if [ ${UID} -eq 0 ]; then              
-        if [ "${USER}" == "${LOGNAME}" ]; then 
-            if [[ ${SUDO_USER} ]]; then
-                PS1="${PS1}\[${COLOR_RED}\]"
-            else
-                PS1="${PS1}\[${COLOR_LIGHTRED}\]"
-            fi
-        else                               
-            PS1="${PS1}\[${COLOR_YELLOW}\]"
-        fi
-    else                                 
-        if [ "${USER}" == "${LOGNAME}" ]; then 
-            PS1="${PS1}\[${COLOR_GREEN}\]"
-        else                               
-            PS1="${PS1}\[${COLOR_BROWN}\]"
-        fi
-    fi
-    PS1="${PS1} }\$\[${COLOR_DEFAULT}\] "
+    PS1="${PS1}>\[${COLOR_DEFAULT}\] "
 }     
 
-# Trim working dir to 1/4 the screen width
+# Trim working dir to 1/2 the screen width
 function prompt_workingdir () {
-  local pwdmaxlen=$(($COLUMNS/4))
+  local pwdmaxlen=$(($COLUMNS/2))
   local trunc_symbol="..."
   if [[ $PWD == $HOME* ]]; then
     newPWD="~${PWD#$HOME}" 
