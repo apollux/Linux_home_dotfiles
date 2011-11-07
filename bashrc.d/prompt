@@ -175,7 +175,7 @@ function promptcmd () {
 	PS1="${PS1}\[${COLOR_YELLOW}\][virtualenv:`basename "$VIRTUAL_ENV"`]"
     fi
 
-    PS1="${PS1}>\[${COLOR_DEFAULT}\] "
+    PS1="${PS1}\[${COLOR_GREEN}\]> \[${COLOR_DEFAULT}\]"
 }     
 
 # Trim working dir to 1/2 the screen width
