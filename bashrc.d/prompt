@@ -101,7 +101,7 @@ function promptcmd () {
     PS1="${PS1}\n"
  
     # User
-    if [ ${UID} -eq 0 ] ; then
+    if [ "${UID}" -eq 0 ] ; then
         if [ "${USER}" == "${LOGNAME}" ]; then
             if [[ ${SUDO_USER} ]]; then
                 PS1="${PS1}\[${COLOR_RED}\]\u"
@@ -112,7 +112,7 @@ function promptcmd () {
             PS1="${PS1}\[${COLOR_YELLOW}\]\u"
         fi
     else
-        if [ ${USER} == ${LOGNAME} ]; then     
+        if [ "${USER}" == "${LOGNAME}" ]; then     
             PS1="${PS1}\[${COLOR_GREEN}\]\u"
         else                               
             PS1="${PS1}\[${COLOR_BROWN}\]\u"
@@ -122,12 +122,12 @@ function promptcmd () {
     PS1="${PS1}\[${COLOR_DEFAULT}\]@"
 
     # Host
-    if [[ ${SSH_CLIENT} ]] || [[ ${SSH2_CLIENT} ]]; then 
+    if [[ "${SSH_CLIENT}" ]] || [[ "${SSH2_CLIENT}" ]]; then 
         SSH_FLAG=1
     fi
-    if [ ${SSH_FLAG} -eq 1 ]; then 
+    if [ "${SSH_FLAG}" -eq 1 ]; then 
        PS1="${PS1}\[${COLOR_CYAN}\]\h "
-    elif [[ -n ${SESS_SRC} ]]; then 
+    elif [[ -n "${SESS_SRC}" ]]; then 
         if [ "${SESS_SRC}" == "(:0.0)" ]; then 
         PS1="${PS1}\[${COLOR_GREEN}\]\h "
         else 
@@ -148,30 +148,30 @@ function promptcmd () {
 
     # Detached Screen Sessions
     local DTCHSCRN=$(screen -ls | grep -c Detach )
-    if [ ${DTCHSCRN} -gt 2 ]; then
+    if [ "${DTCHSCRN}" -gt 2 ]; then
         PS1="${PS1}\[${COLOR_RED}\][scr:${DTCHSCRN}] "
-    elif [ ${DTCHSCRN} -gt 0 ]; then
+    elif [ "${DTCHSCRN}" -gt 0 ]; then
         PS1="${PS1}\[${COLOR_YELLOW}\][scr:${DTCHSCRN}] "
     fi
    
     # Backgrounded running jobs
     local BKGJBS=$(jobs -r | wc -l )
-    if [ ${BKGJBS} -gt 2 ]; then
+    if [ "${BKGJBS}" -gt 2 ]; then
         PS1="${PS1}\[${COLOR_RED}\][bg:${BKGJBS}]"
-    elif [ ${BKGJBS} -gt 0 ]; then
+    elif [ "${BKGJBS}" -gt 0 ]; then
         PS1="${PS1}\[${COLOR_YELLOW}\][bg:${BKGJBS}] "
     fi
 
     # Stopped Jobs
     local STPJBS=$(jobs -s | wc -l )
-    if [ ${STPJBS} -gt 2 ]; then
+    if [ "${STPJBS}" -gt 2 ]; then
         PS1="${PS1}\[${COLOR_RED}\][stp:${STPJBS}]"
-    elif [ ${STPJBS} -gt 0 ]; then
+    elif [ "${STPJBS}" -gt 0 ]; then
         PS1="${PS1}\[${COLOR_YELLOW}\][stp:${STPJBS}]"
     fi
 
     # Virtualenv
-    if [ -n ${VIRTUAL_ENV} ] && [ "${VIRTUAL_ENV}" != "" ]; then
+    if [ -n "${VIRTUAL_ENV}" ] && [ "${VIRTUAL_ENV}" != "" ]; then
 	PS1="${PS1}\[${COLOR_YELLOW}\][virtualenv:`basename "$VIRTUAL_ENV"`]"
     fi
 
@@ -182,12 +182,12 @@ function promptcmd () {
 function prompt_workingdir () {
   local pwdmaxlen=$(($COLUMNS/2))
   local trunc_symbol="..."
-  if [[ $PWD == $HOME* ]]; then
+  if [[ "$PWD" == $HOME* ]]; then
     newPWD="~${PWD#$HOME}" 
   else
     newPWD=${PWD}
   fi
-  if [ ${#newPWD} -gt $pwdmaxlen ]; then
+  if [ "${#newPWD}" -gt "$pwdmaxlen" ]; then
     local pwdoffset=$(( ${#newPWD} - $pwdmaxlen + 3 ))
     newPWD="${trunc_symbol}${newPWD:$pwdoffset:$pwdmaxlen}"
   fi
@@ -206,10 +206,10 @@ function load_prompt () {
     local parent_process=$(cat /proc/$PPID/cmdline | cut -d \. -f 1)
     local my_process=$(cat /proc/$$/cmdline | cut -d \. -f 1)
 
-    if  [[ $parent_process == script* ]]; then
+    if  [[ "$parent_process" == script* ]]; then
         PROMPT_COMMAND=""
         PS1="\t - \# - \u@\H { \w }\$ "
-    elif [[ $parent_process == emacs* || $parent_process == xemacs* ]]; then
+    elif [[ "$parent_process" == emacs* || "$parent_process" == xemacs* ]]; then
         PROMPT_COMMAND=""
         PS1="\u@\h { \w }\$ "
     else
