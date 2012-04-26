@@ -82,7 +82,7 @@ function promptcmd () {
             local TITLEBAR='\[\033]0;\u@\h: { \w }  \007\]'
             ;;
         *       )  
-            local TITLEBAR=''                               
+            local TITLEBAR=''
             ;;
     esac
     PS1="${TITLEBAR}"
@@ -175,7 +175,12 @@ function promptcmd () {
 	PS1="${PS1}\[${COLOR_YELLOW}\][virtualenv:`basename "$VIRTUAL_ENV"`]"
     fi
 
+    # git branch
+    GIT_BRANCH=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1]/" )
+    PS1="${PS1}\[${COLOR_PURPLE}\]${GIT_BRANCH}"
+
     PS1="${PS1}\[${COLOR_GREEN}\]> \[${COLOR_DEFAULT}\]"
+
 }     
 
 # Trim working dir to 1/2 the screen width
