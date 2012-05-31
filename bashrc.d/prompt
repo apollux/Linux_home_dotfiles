@@ -172,12 +172,24 @@ function promptcmd () {
 
     # Virtualenv
     if [ -n "${VIRTUAL_ENV}" ] && [ "${VIRTUAL_ENV}" != "" ]; then
-	PS1="${PS1}\[${COLOR_YELLOW}\][virtualenv:`basename "$VIRTUAL_ENV"`]"
+        PS1="${PS1}\[${COLOR_YELLOW}\][virtualenv:`basename "$VIRTUAL_ENV"`]"
     fi
 
     # git branch
-    GIT_BRANCH=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1]/" )
-    PS1="${PS1}\[${COLOR_PURPLE}\]${GIT_BRANCH}"
+    GIT_BRANCH=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/" )
+    if [ -n "${GIT_BRANCH}" ]; then \
+        GIT_DIRTY=$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
+        if [ "$?" -eq "0" ]; then 
+            echo ""; \
+        else \
+            echo "*";
+        fi)
+        PS1="${PS1}\[${COLOR_PURPLE}\][${GIT_BRANCH}${GIT_DIRTY}]"
+    fi
+
+#    # vi invoked shell
+#    VI_SHELL=$(ps h --pid ${PPID} --format cmd)
+#    PS1="${PS1}\[${COLOR_YELLOW}\]${VI_SHELL}"
 
     PS1="${PS1}\[${COLOR_GREEN}\]> \[${COLOR_DEFAULT}\]"
 
