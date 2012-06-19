@@ -1,0 +1,25 @@
+call pathogen#infect()
+call pathogen#helptags()
+
+syntax on
+filetype plugin indent on
+
+autocmd FileType cpp setl smartindent tabstop=4 shiftwidth=4 expandtab
+
+" Use vim settings, rather then vi settings (much better!)
+" " This must be first, because it changes other options as a side effect.
+set nocompatible
+
+set showmode   " always show what mode we're currently editing in
+set nowrap     " don't wrap lines
+set number     " always show line numbers
+set showmatch  " set show matching parenthesis
+set ignorecase " ignore case when searching
+set smartcase  " ignore case if search pattern is all lowercase, case-sensitive otherwise
+set hlsearch   " highlight search terms
+set incsearch  " show search matches as you type
+set nobackup   " no backup files
+set noswapfile
+set mouse=a    " enable using the mouse if terminal emulator supports it (xterm does)
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+set list
