@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+
+function ntimes()
+{
+	seq 1 $1| { shift; xargs -i -- "$@"; } 
+}
+
+export -f ntimes
+
