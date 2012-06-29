@@ -47,6 +47,8 @@
 # removed day change notice
 # prompt ends with '>'
 # pwd on first line trucated to half screen size
+# git info added
+# time added to prompt
 
 # Configure Colors:
 COLOR_WHITE='\033[1;37m'
@@ -99,6 +101,10 @@ function promptcmd () {
 
     # New line after pwd
     PS1="${PS1}\n"
+
+    # time
+    LOCALTIME=$(date +"%T")
+    PS1="${PS1}\[${COLOR_GREEN}\]${LOCALTIME} "
  
     # User
     if [ "${UID}" -eq 0 ] ; then
@@ -120,6 +126,7 @@ function promptcmd () {
     fi
 
     PS1="${PS1}\[${COLOR_DEFAULT}\]@"
+
 
     # Host
     if [[ "${SSH_CLIENT}" ]] || [[ "${SSH2_CLIENT}" ]]; then 
