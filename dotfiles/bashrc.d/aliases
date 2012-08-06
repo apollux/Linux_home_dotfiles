@@ -21,6 +21,9 @@ alias lla='ll -A'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias ping='ping -c 5'
+alias pg='ps -Af | grep $1'
+
 # pushd popd aliases
 alias pu='pushd .'
 alias po='popd'
