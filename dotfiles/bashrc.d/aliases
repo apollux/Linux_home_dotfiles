@@ -27,3 +27,5 @@ alias pg='ps -Af | grep $1'
 # pushd popd aliases
 alias pu='pushd .'
 alias po='popd'
+
+alias g='git'
