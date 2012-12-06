@@ -48,6 +48,12 @@
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	ls = ls-files
+	amend = commit --amend -C HEAD
+	sha = log -1 --pretty=format:%H #get sha1 hash for HEAD on current branch
+	sl = stash list
+	sa = stash apply
+	ss = stash save
+	sp = stash pop
 
 # Show files ignored by git:
 	ign = ls-files -o -i --exclude-standard
