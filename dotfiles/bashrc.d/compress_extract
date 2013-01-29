@@ -25,3 +25,20 @@ function extract()
 
 export -f extract
 
+function compress()
+{
+    case $1 in
+        *.tar.gz) 
+            tar cvzf  "$@"
+            ;;
+        *.tar.bz2)
+            tar cvjf "$@"
+            ;;
+        *.zip)
+            zip -r "$@"
+            ;;
+        *) echo "cannot create $1"
+    esac
+}
+
+export -f compress
