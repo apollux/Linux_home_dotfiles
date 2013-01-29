@@ -29,3 +29,8 @@ alias pu='pushd .'
 alias po='popd'
 
 alias g='git'
+
+function cd()
+{
+     builtin cd "$*" && ls
+}
