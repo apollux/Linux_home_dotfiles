@@ -19,12 +19,12 @@ number=$RANDOM
 let "number %= $RANGE"
 case $number in
 	0)
-		command="/usr/games/cowsay"
+		command="cowsay"
 		;;
 	1)
-		command="/usr/games/cowthink"
+		command="cowthink"
 		;;
 esac
-/usr/games/fortune | $command -f $cow
+fortune | $command -f $cow
 
 
