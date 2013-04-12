@@ -38,10 +38,12 @@
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
 [alias]
-	st = status
+	st = status -sb
 	ci = commit
 	br = branch
 	co = checkout
+	purr = pull --rebase
+	ready = rebase -i @{u}
 	df = diff
 	dc = diff --cached
 	lg = log -p
