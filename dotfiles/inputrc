@@ -1,2 +1,7 @@
+#search history on partly entered commands
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+#completion tweaks
 set show-all-if-ambiguous on
 set show-all-if-unmodified on
