@@ -37,8 +37,8 @@ alias ....='cd ../../..' # Go up three directories
 # yaourt (manually add --noconfirm to skip prompts)
 alias y='yaourt' # yaourt alias
 alias yiu='comm -23 <(yaourt -Qeq|sort) <(yaourt -Qgq base base-devel|sort)' # list user installed packages
-alias yu='yaourt -Syyu' # Sync and upgrade packages from pacman
-alias yua='yaourt -Syyu --aur' # Sync and upgrade packages from pacman + aur
+alias yu='yaourt -Syu' # Sync and upgrade packages from pacman
+alias yua='yaourt -Syu --aur' # Sync and upgrade packages from pacman + aur
 alias yr='yaourt -Rns' # Remove the specified package(s), its configuration(s) and unneeded dependencies
 alias yf='yaourt -Ql' # List files for the package
 alias yo='yaourt -Qdt' # List orphans
