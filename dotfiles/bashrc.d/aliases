@@ -44,7 +44,7 @@ alias yf='yaourt -Ql' # List files for the package
 alias yo='yaourt -Qdt' # List orphans
 
 
-function cd()
+function lcd()
 {
-     builtin cd "$*" && ls
+     builtin cd "$*" && ll
 }
