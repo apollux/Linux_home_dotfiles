@@ -1,9 +1,0 @@
-#!/bin/bash
-function sudo
-{
-  cygstart --action=runas "$@"
-}
-
-if [[ "${OSTYPE}" == "cygwin" ]]; then
-  export -f sudo
-fi
