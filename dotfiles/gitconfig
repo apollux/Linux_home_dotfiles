@@ -9,12 +9,23 @@
 	file-view-vpane-position = 373
 
 [diff]
-    tool = meld
+	tool = p4merge
+[difftool "p4merge"]
+	cmd = p4merge "$LOCAL" "$REMOTE"
+	keepTemporaries = false
+	trustExitCode = false
+	keepBackup = false
+[difftool]
+	prompt = false
 [merge]
 	tool = p4merge
 [mergetool]
 	prompt = false
-
+[mergetool "p4merge"]
+	cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+	keepTemporaries = false
+	trustExitCode = false
+	keepBackup = false
 [color]
 	ui = auto
 [color "branch"]
@@ -57,7 +68,8 @@
 	ss = stash save
 	sp = stash pop
 	branch-name = rev-parse --abbrev-ref HEAD
-
+	rc = rebase --continue
+	fuck = reset HEAD --hard
 # Show files ignored by git:
 	ign = ls-files -o -i --exclude-standard
 
