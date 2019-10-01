@@ -1,6 +1,5 @@
-[user]
-	name = Andre Kwakernaak
-	email = andre.kwakernaak@gmail.com
+[include]
+    path = ~/.gitconfig.user
 
 [diff]
     tool = p4merge
