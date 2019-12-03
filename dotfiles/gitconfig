@@ -18,7 +18,7 @@
 	keepTemporaries = false
 	trustExitCode = false
 	keepBackup = false
-	path = C:\\Program Files\\Perforce\\p4merge.exe
+#	path = C:\\Program Files\\Perforce\\p4merge.exe
 [color]
     ui = auto
 [color "branch"]
@@ -29,7 +29,7 @@
     meta = yellow bold
     frag = magenta bold
     old = red bold
-    new = green bold
+    new = green
 [color "status"]
     added = yellow
     changed = green
@@ -41,7 +41,7 @@
 [core]
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	autocrlf = false
-	editor = 'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin
+	editor = vim
 
 [alias]
     st = status -sb
